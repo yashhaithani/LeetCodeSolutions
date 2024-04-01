@@ -26,11 +26,4 @@ class Solution
         
         return total;
     }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(solution.romanToInt("III"));     // Output: 3
-        System.out.println(solution.romanToInt("LVIII"));   // Output: 58
-        System.out.println(solution.romanToInt("MCMXCIV")); // Output: 1994
-    } 
 }
