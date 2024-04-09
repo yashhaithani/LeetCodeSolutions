@@ -1,23 +1,28 @@
 class Solution {
     public int strStr(String haystack, String needle) 
     {
-       if (haystack == null || needle == null || haystack.length() < needle.length())
+        int requiredIndex = -1;
+        if(needle.length() > haystack.length())
             return -1;
-        
-        if (needle.isEmpty())
-            return 0;
-        
-        for (int i = 0; i <= haystack.length() - needle.length(); i++) 
+        for(int i=0; i<haystack.length(); i++)
         {
-            int j;
-            for (j = 0; j < needle.length(); j++) 
+            int j = 0;
+            requiredIndex = i;
+
+            while (i < haystack.length())
             {
-                if (haystack.charAt(i + j) != needle.charAt(j))
+                if(haystack.charAt(i) == needle.charAt(j))
+                {
+                    i++;
+                    j++;
+                    if (j == needle.length())
+                        return requiredIndex;
+                }
+                else 
                     break;
             }
-            if (j == needle.length())
-                return i;
-        } 
+            i = requiredIndex;
+        }
         return -1;
     }
-}  
+}
