@@ -1,0 +1,20 @@
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int nonZeroPointer = 0; // Points to the next position to place a non-zero element
+
+        // Iterate through the array
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                // If the current element is non-zero, move it to the nonZeroPointer position
+                nums[nonZeroPointer] = nums[i];
+                
+                // If the nonZeroPointer is behind i, set the current position to zero
+                if (nonZeroPointer != i) {
+                    nums[i] = 0;
+                }
+                
+                nonZeroPointer++; // Move the nonZeroPointer forward
+            }
+        }
+    }
+}
