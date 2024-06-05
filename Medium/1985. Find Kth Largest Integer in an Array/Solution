@@ -1,0 +1,17 @@
+class Solution {
+    public String kthLargestNumber(String[] nums, int k) 
+    {
+        // Sort the array with a custom comparator
+        Arrays.sort(nums, new Comparator<String>() {
+            public int compare(String a, String b) {
+                if (a.length() != b.length()) {
+                    return b.length() - a.length();
+                }
+                return b.compareTo(a);
+            }
+        });
+        
+        // Return the k-th largest number
+        return nums[k - 1];
+    }
+}
