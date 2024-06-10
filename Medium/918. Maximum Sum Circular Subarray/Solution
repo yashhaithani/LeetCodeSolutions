@@ -1,0 +1,25 @@
+class Solution {
+    public int maxSubarraySumCircular(int[] nums) {
+        int nonwrapSum = kadane(nums);
+        int total = 0;
+        for (int i = 0; i < nums.length; i++) {
+            total += nums[i];
+            nums[i] = -nums[i];
+        }        
+        int invertedMaxSum = kadane(nums);
+        int wrapSum = total + invertedMaxSum; 
+        if (wrapSum == 0) {
+            return nonwrapSum;
+        }
+        return Math.max(nonwrapSum, wrapSum);
+    }
+    private int kadane(int[] nums) {
+        int currsum = 0;
+        int maxSum = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            currsum = Math.max(nums[i], currsum + nums[i]);
+            maxSum = Math.max(maxSum, currsum);
+        }
+        return maxSum;
+    }
+}
