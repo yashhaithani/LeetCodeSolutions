@@ -1,0 +1,48 @@
+class Solution {
+    public int longestAlternatingSubarray(int[] nums, int threshold) {
+        int maxLength = 0;
+        int currentLength = 0;
+        boolean shouldBeEven = true;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] <= threshold) {
+                if (currentLength == 0 && nums[i] % 2 == 0) {
+                    // Starting a new subarray from an even number
+                    currentLength = 1;
+                    shouldBeEven = false;
+                } 
+                else if (currentLength > 0) {
+                    if (shouldBeEven && nums[i] % 2 == 0) {
+                        // Continuing the alternating pattern
+                        currentLength++;
+                        shouldBeEven = false;
+                    } 
+                    else if (!shouldBeEven && nums[i] % 2 != 0) {
+                        // Continuing the alternating pattern
+                        currentLength++;
+                        shouldBeEven = true;
+                    } 
+                    else {
+                        // The alternating pattern is broken
+                        if (nums[i] % 2 == 0) {
+                            // Start a new subarray from this even number
+                            currentLength = 1;
+                            shouldBeEven = false;
+                        } 
+                        else {
+                            currentLength = 0;
+                    }
+                }
+            } 
+            else {
+                // Reset the current subarray length if the number exceeds the threshold
+                currentLength = 0;
+            }
+
+            // Update the maximum length found so far
+            maxLength = Math.max(maxLength, currentLength);
+        }
+
+        return maxLength;
+    }
+}
