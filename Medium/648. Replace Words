@@ -1,0 +1,39 @@
+class Solution {
+     class TrieNode {
+        Map<Character, TrieNode> children = new HashMap<>();
+        String word = null;
+    }
+    private void insert(TrieNode root, String word) {
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            if (!node.children.containsKey(c))
+                node.children.put(c, new TrieNode());
+            node = node.children.get(c);
+        }
+        node.word = word;  
+    }
+    private String searchPrefix(TrieNode root, String word) {
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            if (!node.children.containsKey(c))
+                return word; 
+            node = node.children.get(c);
+            if (node.word != null)
+                return node.word; 
+        }
+        return word; 
+    }
+    public String replaceWords(List<String> dictionary, String sentence) {
+        TrieNode root = new TrieNode();
+        for (String word : dictionary)
+            insert(root, word);
+        String[] words = sentence.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (String word : words) {
+            if (sb.length() > 0)
+                sb.append(" ");
+            sb.append(searchPrefix(root, word));
+        }
+        return sb.toString();
+    }
+}
