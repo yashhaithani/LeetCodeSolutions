@@ -1,0 +1,26 @@
+class Solution {
+     static boolean isPalindrome(String s) { 
+        StringBuilder cleanedString = new StringBuilder();
+        
+        // Clean the string: remove non-alphanumeric characters and convert to lowercase
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isLetterOrDigit(c)) {
+                cleanedString.append(Character.toLowerCase(c));
+            }
+        }
+
+        // Check if the cleaned string is a palindrome
+        int start = 0;
+        int end = cleanedString.length() - 1;
+
+        while (start <= end) {
+            if (cleanedString.charAt(start) != cleanedString.charAt(end)) {
+                return false;  // Not a palindrome
+            }
+            start++;
+            end--;
+        }
+        return true;  // Is a palindrome
+    }
+}
