@@ -1,0 +1,18 @@
+class Solution 
+{   public boolean isAnagram(String s, String t) 
+    {   if (s.length() != t.length())      // Check lengths
+            return false;
+        int[] charCount = new int[256];     // Freq array for characters 'a' to 'z'
+        
+        for (char c : s.toCharArray())     // Count frequencies in string s
+            charCount[c - 'a']++;     
+        for (char c : t.toCharArray())     // Decrease frequencies in string t
+            charCount[c - 'a']--;
+       
+        for (int count : charCount)        // Check if all counts are zero
+        {   if (count != 0)
+                return false;
+        } 
+        return true;
+    }
+}
