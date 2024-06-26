@@ -1,0 +1,26 @@
+Runtime 6ms
+Beats   97.98%
+Memory  47.52 MB
+Beats   72.97%
+
+CODE ->
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        // Create a HashMap to store the anagrams grouped by their sorted string
+        HashMap<String, List<String>> map = new HashMap<>();
+        
+        for (String str : strs) 
+        {   char[] charArray = str.toCharArray();         // Convert the string to a char array and sort it
+            Arrays.sort(charArray);
+            String sortedStr = new String(charArray);     // Convert the sorted char array back to a string
+            if (!map.containsKey(sortedStr))              // If sorted string is not in map, add it with an empty list
+                map.put(sortedStr, new ArrayList<>());
+            
+            // Add the original string to the list corresponding to the sorted string key
+            map.get(sortedStr).add(str);
+        }
+        return new ArrayList<>(map.values());
+    }
+} 
+
