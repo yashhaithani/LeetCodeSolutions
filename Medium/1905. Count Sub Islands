@@ -1,0 +1,34 @@
+class Solution {
+    int m;
+    int n;
+    boolean isSubIsland;
+
+    public void dfs(int[][] grid1, int grid2[][], int i, int k){
+        if(i<0 || i==m || k<0 || k == n || grid2[i][k] == 0)
+            return;
+        if(grid1[i][k] != grid2[i][k])
+            isSubIsland = false;
+        grid2[i][k] = 0;
+        dfs(grid1, grid2, i+1, k);
+        dfs(grid1, grid2, i-1, k);
+        dfs(grid1, grid2, i, k+1);
+        dfs(grid1, grid2, i, k-1);
+    }
+
+    public int countSubIslands(int[][] grid1, int[][] grid2) {
+     m = grid1.length;
+     n = grid1[0].length;   
+     int ans = 0;
+     for(int i = 0; i<m; i++){
+        for(int k = 0; k<n; k++){
+            if(grid2[i][k] == 1){
+                isSubIsland = true;
+                dfs(grid1, grid2, i ,k);
+                if(isSubIsland)
+                    ans++;
+            }
+        }
+    }
+    return ans;
+    }
+}
