@@ -1,0 +1,19 @@
+class Solution {
+    public int minSwaps(String s) {
+        int opening = 0;
+        int unbalanced = 0;
+
+        for (var c: s.getBytes()) {
+            if (c == '[') {
+                opening++;
+            } else {
+                if (opening > 0)
+                    opening--;
+                else
+                    unbalanced++;    
+            }
+        }
+
+        return unbalanced / 2 + unbalanced % 2;
+    }
+}
